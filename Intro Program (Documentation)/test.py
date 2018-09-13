@@ -1,4 +1,5 @@
 import re # regex
+import sys # interactivity
 
 def cleanup(sampleString):
     sampleString = sampleString.replace("’","") # remove fancy apostrophe
@@ -9,9 +10,12 @@ def cleanup(sampleString):
     return sampleString
 
 score = 0
+length = 0
 
 def wordCount(tPhrase):
     global score # global variable
+    global length
+
     original = tPhrase # stores a copy of the original for double checking purposes
 
     # Occurence of word chains
@@ -19,7 +23,7 @@ def wordCount(tPhrase):
     index = 0
 
     # Cleanup input text TODO make this only run the first time through loop
-    tPhrase = cleanup(tP)
+    tPhrase = cleanup(tPhrase)
 
     # Change input text to list
     tPhrase = tPhrase.split()
@@ -50,7 +54,10 @@ def wordCount(tPhrase):
                 continue
 
     # Prints the longest chain found, and the number of words in the chain
-    print(highestIndex,tPhrase[:highestIndex])
+    if highestIndex == 0:
+        print(highestIndex,tPhrase[:highestIndex+1])
+    else:
+        print(highestIndex,tPhrase[:highestIndex])
 
     # keeps all words not found in the previous chain
     del tPhrase[:highestIndex]
@@ -63,7 +70,10 @@ def wordCount(tPhrase):
 
     # Checks if recursion is finished
     if not tPhrase or tPhrase == original:
-        print("Final Score Is:", score)
+        highestPossibleScore = 2**length
+        errorMargin = 100*(score/highestPossibleScore)
+        print(highestPossibleScore,score)
+        print("Your sentence is", errorMargin, "percent similar to what Donald Trump would tweet in 2018")
         return 0;
 
     # recursion!
@@ -75,5 +85,7 @@ file = open("trump2018.txt", errors='ignore')
 tweets = file.read()
 tweets = cleanup(tweets)
 
-# Execute command TODO make it interactive with user
-wordCount("Vote for Scott on Tuesday in the Republican Primary!")
+# Execute command TODO make it loop through
+inputStatement = input()
+length = inputStatement.count(' ')+1
+wordCount(inputStatement)
