@@ -54,8 +54,21 @@ def wordCount(tPhrase):
                 # continue
 
     # Prints the longest chain found, and the number of words in the chain
+    # TODO write single score function
     if highestIndex == 0:
         print(highestIndex,tPhrase[:highestIndex+1])
+        if original.count(' ') == 0:
+            score = score + 1.5**highestIndex
+
+            # Prevent giving free scores
+            if highestIndex == 0:
+                score = score - 1
+
+            highestPossibleScore = 1.5**length
+            errorMargin = 100*(score/highestPossibleScore)
+            # print(highestPossibleScore,score)
+            print("Your sentence is", errorMargin, "percent similar to what Donald Trump would tweet in 2018")
+            return 0
     else:
         print(highestIndex,tPhrase[:highestIndex])
 
@@ -73,6 +86,8 @@ def wordCount(tPhrase):
         highestPossibleScore = 1.5**length
         errorMargin = 100*(score/highestPossibleScore)
         # print(highestPossibleScore,score)
+        if highestIndex == 0:
+            score = score - 1
         if errorMargin > 100:
             print("Your sentence is", errorMargin, "percent similar to what Donald Trump would tweet in 2018. You have trumped the Trump! (it's not supposed to happen) Please report this issue on github.")
         else:
