@@ -51,7 +51,7 @@ def wordCount(tPhrase):
                 # Reset index
                 index = 0
 
-                continue
+                # continue
 
     # Prints the longest chain found, and the number of words in the chain
     if highestIndex == 0:
@@ -63,17 +63,20 @@ def wordCount(tPhrase):
     del tPhrase[:highestIndex]
 
     # Increments Score TODO make alg more realistic
-    score = score + 2**highestIndex
+    score = score + 1.5**highestIndex
 
     # Convert back to string
     tPhrase = ' '.join(tPhrase)
 
     # Checks if recursion is finished
     if not tPhrase or tPhrase == original:
-        highestPossibleScore = 2**length
+        highestPossibleScore = 1.5**length
         errorMargin = 100*(score/highestPossibleScore)
-        print(highestPossibleScore,score)
-        print("Your sentence is", errorMargin, "percent similar to what Donald Trump would tweet in 2018")
+        # print(highestPossibleScore,score)
+        if errorMargin > 100:
+            print("Your sentence is", errorMargin, "percent similar to what Donald Trump would tweet in 2018. You have trumped the Trump! (it's not supposed to happen) Please report this issue on github.")
+        else:
+            print("Your sentence is", errorMargin, "percent similar to what Donald Trump would tweet in 2018")
         return 0;
 
     # recursion!
