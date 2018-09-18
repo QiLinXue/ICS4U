@@ -72,14 +72,13 @@ def wordCount(tPhrase: str) -> str:
   global score # the final score that is outputted
   global length # the original length of the input string
 
-  original = tPhrase # stores a copy of the original for double checking purposes
-
   # Occurence of word chains
   highestIndex = 0; #highest index of words possible, can only increase
   index = 0 #temporary index, can change often
 
   # Cleanup input text
   tPhrase = cleanup(tPhrase) # Removes punctuation and unneeded spaces
+  original = tPhrase # stores a copy of the original for double checking purposes
   tPhrase = tPhrase.split() # Change input text to list
   tempTweets = tweets.split() # create new variable to store tweets in a list
 
@@ -114,8 +113,8 @@ def wordCount(tPhrase: str) -> str:
   del tPhrase[:highestIndex]
 
   # Increments Score TODO make alg more realistic (too easy for short sentences, too hard for longer ones)
-  highestPossibleScore = 1.7**length
-  score = score + 1.7**highestIndex
+  highestPossibleScore = 1.8**length
+  score = score + 1.8**highestIndex
 
   if highestIndex == 0: # 1.5**0 = 1 which is unfair
       score = score - 1
