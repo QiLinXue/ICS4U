@@ -83,10 +83,10 @@ def wordCount(tPhrase: str) -> str:
   tempTweets = tweets.split() # create new variable to store tweets in a list
 
   # Loop through all words in phrase
-  for i in range(0,len(tPhrase)):
-
+  for i in range(len(tPhrase)):
+      
       # Loop through all tweets
-      for j in range(0,len(tempTweets)):
+      for j in range(len(tempTweets)):
 
           # If in range AND found a matching pair of words
           if i + index < len(tPhrase) and tempTweets[j]  == tPhrase[i+index]:
