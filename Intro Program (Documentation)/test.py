@@ -20,6 +20,7 @@
 
 import re # regex
 import sys # interactivity
+import math # calculating percentage
 
 #-----------------------------------------------------------------------------
 # Functions
@@ -49,6 +50,8 @@ def cleanup(text: str) -> str:
   text = re.sub(r'[^\w\s]',' ',text) # replace all other punctuation with a space
   text = re.sub(' +',' ',text) # remove double spaces
   text = text.lower() # change everything to lowercase
+  if text[-1:] == ' ': text = text[:-1] # Remove last character if whitespace
+
   return text
 
 def wordCount(tPhrase: str) -> str:
@@ -85,39 +88,40 @@ def wordCount(tPhrase: str) -> str:
   # Loop through all words in phrase
   for i in range(len(tPhrase)):
       
-      # Loop through all tweets
-      for j in range(len(tempTweets)):
+    # Loop through all tweets
+    for j in range(len(tempTweets)):
 
-          # If in range AND found a matching pair of words
-          if i + index < len(tPhrase) and tempTweets[j]  == tPhrase[i+index]:
-              index = index + 1
+      # If in range AND found a matching pair of words
+      if i + index < len(tPhrase) and tempTweets[j]  == tPhrase[i+index]:
+        index = index + 1
 
-          # if no more matching pairs found
-          else:
-              if index > highestIndex:
-                  highestIndex = index
-              index = 0
+      # if no more matching pairs found
+      else:
+        if index > highestIndex:
+          highestIndex = index
+        index = 0
 
-      # If tweets are all looped and still no match found, break from tPhrase loop
-      if highestIndex == 0:
-          break;
+    # If tweets are all looped and still no match found, break from tPhrase loop
+    if highestIndex == 0:
+        break;
 
   # Prints the longest chain found, and the number of words in the chain
   if highestIndex == 0:
-      print(highestIndex,tPhrase[:highestIndex+1])
+    print(highestIndex,tPhrase[:highestIndex+1])
 
   else:
-      print(highestIndex,tPhrase[:highestIndex])
+    print(highestIndex,tPhrase[:highestIndex])
 
   # keeps all words not found in the previous chain
   del tPhrase[:highestIndex]
 
-  # Increments Score TODO make alg more realistic (too easy for short sentences, too hard for longer ones)
-  highestPossibleScore = 1.8**length
-  score = score + 1.8**highestIndex
+  # Increments Score
+  base = math.exp(3-length)+1.3 # calculated from https://www.desmos.com/calculator/8veu8dzjn7
+  highestPossibleScore = base**length
+  score = score + base**highestIndex
 
   if highestIndex == 0: # 1.5**0 = 1 which is unfair
-      score = score - 1
+    score = score - 1
 
   # Convert back to string
   tPhrase = ' '.join(tPhrase)
@@ -126,18 +130,18 @@ def wordCount(tPhrase: str) -> str:
   # Checks if there is no change
   if tPhrase == original:
 
-      # Deletes first item
-      tPhrase = tPhrase.split(' ')
-      del tPhrase[:highestIndex+1]
-      tPhrase = ' '.join(tPhrase)
+    # Deletes first item
+    tPhrase = tPhrase.split(' ')
+    del tPhrase[:highestIndex+1]
+    tPhrase = ' '.join(tPhrase)
 
   # Checks if recursion is finished
   if not tPhrase:
 
-      # Oytputs Result
-      errorMargin = 100*(score/highestPossibleScore) # Converts score to percentage
-      print("Your sentence is", errorMargin, "percent similar to what DonaldTrump would tweet in 2018")
-      return 0; #endpoint
+    # Outputs Result
+    errorMargin = 100*(score/highestPossibleScore) # Converts score to percentage
+    print("Your sentence is", errorMargin, "percent similar to what DonaldTrump would tweet in 2018")
+    return 0; #endpoint
 
   # recursion!
   wordCount(tPhrase)
@@ -158,6 +162,9 @@ while True:
   inputStatement = input()
   length = inputStatement.count(' ')+1
 
+  if inputStatement == "alexa play despacito":
+    print("Program Stopped")
+    break
   # Run Main Function
   wordCount(inputStatement)
 
