@@ -7,7 +7,7 @@
 #
 # Author:      QiLin Xue
 # Created:     13-Sep-2018
-# Updated:     17-Sep-2018
+# Updated:     19-Sep-2018
 #-----------------------------------------------------------------------------
 
 # ▀▀█▀▀░█▀█░█░░█░█▄░▄█░█▀█░░
@@ -45,10 +45,11 @@ def cleanup(text: str) -> str:
 		Cleaned up version of text with no punctuation, single spaced seperation, and all lowercase
   """
 
-  text = text.replace("’","") # remove fancy apostrophe
-  text = text.replace("\'","") # remove normal apostrophe
+  text = text.replace("’","") # remove fancy apostrophe with no space
+  text = text.replace("\'","") # remove normal apostrophe with no space
+  text = text.replace("_"," ") # remove underscore with space (regex doesn't catch it)
   text = re.sub(r'[^\w\s]',' ',text) # replace all other punctuation with a space
-  text = re.sub(' +',' ',text) # remove double spaces
+  text = text.replace("  ", " ") # remove double spaces
   text = text.lower() # change everything to lowercase
   if text[-1:] == ' ': text = text[:-1] # Remove last character if whitespace
 
@@ -69,6 +70,12 @@ def wordCount(tPhrase: str) -> str:
         prints out the longest chain number for the current string
     if there are no more unmatched words
         prints out the overall score when matched to Trump
+  
+  Returns
+  -------
+  Boolean
+    Can only be True, called to end the recursion when all words have been checked
+
   """
 
   # global variables so they can be accessed outside the function
@@ -116,7 +123,7 @@ def wordCount(tPhrase: str) -> str:
   del tPhrase[:highestIndex]
 
   # Increments Score
-  base = math.exp(3-length)+1.3 # calculated from https://www.desmos.com/calculator/8veu8dzjn7
+  base = math.exp(3-length)+1.3 # calculated from www.desmos.com/calculator/8veu8dzjn7
   highestPossibleScore = base**length
   score = score + base**highestIndex
 
@@ -125,7 +132,6 @@ def wordCount(tPhrase: str) -> str:
 
   # Convert back to string
   tPhrase = ' '.join(tPhrase)
-
 
   # Checks if there is no change
   if tPhrase == original:
@@ -141,7 +147,7 @@ def wordCount(tPhrase: str) -> str:
     # Outputs Result
     errorMargin = 100*(score/highestPossibleScore) # Converts score to percentage
     print("Your sentence is", errorMargin, "percent similar to what DonaldTrump would tweet in 2018")
-    return 0; #endpoint
+    return True; #endpoint
 
   # recursion!
   wordCount(tPhrase)
