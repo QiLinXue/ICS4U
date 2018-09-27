@@ -21,11 +21,11 @@ wn.listen()
 
 # Turtle Setup
 turtle.tracer(0, 0)
-pen.speed(4)
+pen.speed(0)
 pen.ht()
 
 # Determines size of everything
-size = 100
+size = 50
 
 # Functions Start
 def rect(x, y, length, width): 
@@ -48,7 +48,7 @@ def rect(x, y, length, width):
   pen.pu()
   pen.goto(x,y)
   pen.pd()
-  pen.pensize(3)
+  pen.pensize(round(size/33.33))
   pen.forward(length)
   pen.left(90)
   pen.forward(width)
@@ -92,9 +92,9 @@ def text(arg, x, y):
 	none
   """
   pen.pu()
-  pen.goto(x,y-20)
+  pen.goto(x,y-(size/5))
   pen.pd()
-  pen.write(arg,False,"center",("Arial","40","normal"))
+  pen.write(arg,False,"center",("Arial",str(round(size/2.5)),"normal"))
 
 # Classes Start
 
@@ -125,7 +125,7 @@ class Piece:
   '''
   
   def __init__(self,color,name,x,y,alive=True):
-  	'''
+    '''
 
 		Constructor to build a piece object
 
@@ -150,7 +150,7 @@ class Piece:
 		..note:: that the "self" parameter is not listed in this section.
 			
 			
-		'''  
+		'''
 
     # Set Color
     if color == "black" or color == "white": self.color = color
@@ -226,17 +226,6 @@ class ChessBoard:
   global size
 
   def __init__(self,
-  	'''
-		Constructor to build the chess board
-		
-		Parameters
-		----------
-    pieces: object Array (Piece)
-      Contains a list of all piece objects
-
-		..note:: that the "self" parameter is not listed in this section.
-
-		'''
     pieces = [
                Piece("black","pawn",0,6), Piece("black","rook",0,7),
                Piece("black","pawn",1,6), Piece("black","knight",1,7),
@@ -257,6 +246,19 @@ class ChessBoard:
                Piece("white","pawn",7,1), Piece("white","rook",7,0),
               ]
     ):
+
+    '''
+		Constructor to build the chess board
+		
+		Parameters
+		----------
+    pieces: object Array (Piece)
+      Contains a list of all piece objects
+
+		..note:: that the "self" parameter is not listed in this section.
+
+		'''
+
     self.pieces = pieces
   
   def display(self):
@@ -284,7 +286,7 @@ class ChessBoard:
 
     return
   
-  def selectPiece(self,x : float,y : float):
+  def selectPiece(self, x, y):
     '''
     Converts window coordinates to board coordinates and prints stats for that coordinate
 
@@ -300,8 +302,8 @@ class ChessBoard:
     none
 
     '''
-    x = math.floor((400+x)/100)
-    y = math.floor((400+y)/100)
+    x = math.floor((4*size+x)/size)
+    y = math.floor((4*size+y)/size)
 
     for piece in self.pieces:
       if piece.alive and piece.x == x and piece.y == y:
