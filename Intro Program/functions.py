@@ -1,5 +1,4 @@
 import re # regex
-print("hi")
 def cleanup(text: str) -> str:
   """
 	Function to remove puncutation and clean up a string
