@@ -1,6 +1,17 @@
+'''
+Classes which are responsible for holding the information
+for each piece and their arrangements
+'''
+
+# Import Statements
 from __init__ import *
 from functions import *
 
+# ---------------------
+# --- Classes Start ---
+# ---------------------
+
+# Piece Class
 class Piece:
 
   '''
@@ -104,7 +115,7 @@ class Piece:
     print(self.name, self.x + 1, self.y + 1, self.color)
     return True
   
-# Chess Board
+# Chess Board Class
 class ChessBoard:
   '''
   A book object that hold the pieces and their location on the board

@@ -1,8 +1,11 @@
+# Initiailization File to reduce redundancy
+
+# Universal Imports
 import turtle
 import math
 from random import randint
 
-# from functions import rect,ellipse,text
+# Determines size of everything
 size = 50
 
 # Create Pen

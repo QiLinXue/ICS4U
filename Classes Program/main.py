@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------
 # Name:        Chess Simulator
-# Purpose:     To simulate Chess
+# Purpose:     To Simulate Custom Chess Positions
 #
 # Author:      QiLin
 # Created:     18-Sep-2018
@@ -12,6 +12,10 @@ from __init__ import *
 from functions import *
 from classes import *
 
+# ------------------------
+# --- Turtle Env Setup ---
+# ------------------------
+
 # Create Screen
 wn = turtle.Screen()
 wn.listen()
@@ -21,7 +25,9 @@ turtle.tracer(0, 0)
 pen.speed(0)
 pen.ht()
 
-# Main Program
+# ------------------------
+# ----- Main Program -----
+# ------------------------
 
 #Initialize Classes
 mainBoard = ChessBoard()
