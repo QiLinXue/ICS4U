@@ -4,13 +4,9 @@ draw rectangles, circles, and display text similar to Processing
 documentation
 '''
 
-# Import
 from __init__ import *
 
-# ------------------------
-# --- Functions Start  ---
-# ------------------------
-
+# Functions Start
 def rect(x, y, length, width): 
   """
 	Function to draw a rectangle
