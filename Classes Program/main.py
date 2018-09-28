@@ -1,20 +1,17 @@
 #-----------------------------------------------------------------------------
 # Name:        Chess Simulator
-# Purpose:     To Simulate Custom Chess Positions
+# Purpose:     To simulate Chess Positions
 #
 # Author:      QiLin
 # Created:     18-Sep-2018
-# Updated:     27-Sep-2018
+# Updated:     28-Sep-2018
 #-----------------------------------------------------------------------------
 
 # Import Start
 from __init__ import *
 from functions import *
-from classes import *
-
-# ------------------------
-# --- Turtle Env Setup ---
-# ------------------------
+from piece  import *
+from chessboard import *
 
 # Create Screen
 wn = turtle.Screen()
@@ -25,16 +22,15 @@ turtle.tracer(0, 0)
 pen.speed(0)
 pen.ht()
 
-# ------------------------
-# ----- Main Program -----
-# ------------------------
+# Main Program
 
 #Initialize Classes
 mainBoard = ChessBoard()
 mainBoard.display()
 wn.update()
 
-while (True):
+# Always Runs
+while True:
   wn.onclick(mainBoard.selectPiece)  
 
   
