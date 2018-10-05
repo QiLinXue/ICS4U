@@ -58,7 +58,7 @@ def wordCount(tPhrase: str) -> str:
   global length # the original length of the input string
 
   # Occurence of word chains
-  highestIndex = 0; #highest index of words possible, can only increase
+  highestIndex = 0 #highest index of words possible, can only increase
   index = 0 #temporary index, can change often
 
   # Cleanup input text
@@ -85,7 +85,7 @@ def wordCount(tPhrase: str) -> str:
 
     # If tweets are all looped and still no match found, break from tPhrase loop
     if highestIndex == 0:
-        break;
+        break
 
   # Prints the longest chain found, and the number of words in the chain
   if highestIndex == 0:
@@ -122,7 +122,7 @@ def wordCount(tPhrase: str) -> str:
     # Outputs Result
     errorMargin = 100*(score/highestPossibleScore) # Converts score to percentage
     print("Your sentence is", errorMargin, "percent similar to what DonaldTrump would tweet in 2018")
-    return True; #endpoint
+    return True #endpoint
 
   # recursion!
   wordCount(tPhrase)
