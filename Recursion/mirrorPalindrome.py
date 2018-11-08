@@ -5,8 +5,11 @@
 #
 # Author:      QiLin
 # Created:     6-Nov-2018
-# Updated:     6-Nov-2018
+# Updated:     8-Nov-2018
 #-----------------------------------------------------------------------------
+
+selfReflection = ['i', 'l', 'm', 'n', 'o', 't', 'u', 'v', 'w', 'x']
+doubleReflection = [('b','d'),('p','q'),('s','z')]
 
 def recursiveCalculate(string,index=0,size=2):
   '''
@@ -29,17 +32,14 @@ def recursiveCalculate(string,index=0,size=2):
   n = 0
 
   if size == 2 and index == 0:
-    doubleReflection = [('b','d'),('p','q'),('s','z')]
-    selfReflection = ['i', 'l', 'm', 'n', 'o', 't', 'u', 'v', 'w', 'x']
 
-    for replacement in doubleReflection: string = string.replace(replacement[0], replacement[1])
+    for rep in doubleReflection: string = string.replace(rep[0], rep[1])
     for letter in string:
       if letter in selfReflection:
         n = n + 1
     
   
   cutString = string.lower()[index:index+size]
-  # print(cutString,string)
 
   if len(string) == 1:
     return 1 # If string is only one character
@@ -47,10 +47,49 @@ def recursiveCalculate(string,index=0,size=2):
     return 0 # Base Case
   if index+size > len(string):
     return recursiveCalculate(string,0,size+1) # Reloop with greater substring size
-  if cutString == cutString[::-1]:
+
+  if isMirrorDrome(cutString):
     return recursiveCalculate(string,index+1,size) + 1 + n # Next substring if palindrome
   else:
     return recursiveCalculate(string,index+1,size) + n # Next substring if no palindrome
+
+def isMirrorDrome(string):
+  '''
+  Function to check if string is a mirror drome
+  ----------
+  string: str
+    the string to check if it's a mirror drome
+  
+  Returns
+  -------
+  bool:
+    True if mirrordrome
+    False if not
+  '''
+  length = len(string)
+  if length % 2 == 0: isOdd = False 
+  else: isOdd = True
+
+  firstHalf = string[:length//2]
+  secondHalf = string[1+length//2:]
+
+  for rep in doubleReflection:
+    if firstHalf == firstHalf.replace(rep[0], rep[1]):
+      firstHalf = firstHalf.replace(rep[1], rep[0])
+    else:
+      firstHalf = firstHalf.replace(rep[0], rep[1])
+
+
+  if firstHalf[::-1] == secondHalf:
+    if isOdd:
+      if string[length//2] in selfReflection:
+        return True
+      else:
+        return False
+    
+    return True
+
+  return False
 
 ##############################################################################
 # Test Function
