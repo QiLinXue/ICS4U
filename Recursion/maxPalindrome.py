@@ -6,7 +6,7 @@
 #
 # Author:      QiLin
 # Created:     6-Nov-2018
-# Updated:     6-Nov-2018
+# Updated:     12-Nov-2018
 #-----------------------------------------------------------------------------
 
 def recursiveCalculate(string,index=0,size=2):
@@ -25,7 +25,7 @@ def recursiveCalculate(string,index=0,size=2):
   Returns
   -------
   int:
-    the number of palindromes within yjr given string
+    the number of palindromes within the given string
 
   '''
   cutString = string.lower()[index:index+size]
