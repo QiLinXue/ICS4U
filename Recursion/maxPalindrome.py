@@ -6,7 +6,7 @@
 #
 # Author:      QiLin
 # Created:     6-Nov-2018
-# Updated:     12-Nov-2018
+# Updated:     15-Nov-2018
 #-----------------------------------------------------------------------------
 
 def recursiveCalculate(string,index=0,size=2):
@@ -73,3 +73,11 @@ class TestMaxPalindrome(unittest.TestCase):
     for case in testCases: self.assertEqual(recursiveCalculate(case[0]),case[1])
 
 unittest.main()
+
+'''
+Oftentimes, recursion takes way too long --> it uses a lot of memory if not thought through properly.
+
+For example, the fibonacci recursion example takes WAY too long, as it will call some functions multiple times.
+
+Also, when processing large sets of data, it might throw the exception "StackOverflowException", while if it was done iteratively, it wouldn't show the error.
+'''
