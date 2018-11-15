@@ -75,9 +75,11 @@ class TestMaxPalindrome(unittest.TestCase):
 unittest.main()
 
 '''
-Oftentimes, recursion takes way too long --> it uses a lot of memory if not thought through properly.
+Common Pitfalls
 
-For example, the fibonacci recursion example takes WAY too long, as it will call some functions multiple times.
+(1) Oftentimes, recursion takes way too long --> it uses a lot of memory if not thought through properly. For example, the fibonacci recursion example takes WAY too long, as it will call some functions multiple times.
 
-Also, when processing large sets of data, it might throw the exception "StackOverflowException", while if it was done iteratively, it wouldn't show the error.
+(2) Also, when processing large sets of data, it might throw the exception "StackOverflowException", while if it was done iteratively, it wouldn't show the error.
+
+(3) One cannot preserve the state through each call, oftentimes making it difficult to implement, or making too many parameters
 '''
