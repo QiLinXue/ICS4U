@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------
 # Name:        Mirror Palindrome
-# Purpose:     To calculate the total number of mirro palindromes within a given
+# Purpose:     To calculate the total number of mirror palindromes within a given
 #              string recursively
 #
 # Author:      QiLin
@@ -28,8 +28,8 @@ def recursiveCalculate(s,original="",taken=None):
   -------
   int:
     the number of palindromes within the given string
-
   '''
+  
   if taken == None: taken, original = [], s # Run first time
   if len(s) == 0: return 0 # Base Case
 
